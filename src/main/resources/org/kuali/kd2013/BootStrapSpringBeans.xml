@@ -112,10 +112,9 @@
   </bean>
 
 
-  <!--an application specific service-->
+  <!--an application specific service
   <bean id="productService" class="org.kuali.kd2013.dataobject.service.impl.MultiplicationProductServiceImpl" />
 
-    <!-- 
     <property name="databaseRepositoryFilePaths">
       <list>
       </list>

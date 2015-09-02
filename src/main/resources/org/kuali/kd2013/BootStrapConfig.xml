@@ -27,18 +27,22 @@ in configuration files outside of the project.
 -->
 <config>
   <param name="config.location">classpath:org/kuali/rice/standalone/config/standalone-config-defaults.xml</param>
-
+  
   <param name="rice.logging.configure">false</param>
 
   <param name="module.name">kd13-ready-set-krad</param>
   <param name="application.id">kd13-ready-set-krad</param>
   <param name="app.context.name">kd13-ready-set-krad</param>
   <param name="app.code" override="false">rsk</param>
-
+  
+  <!-- Added by Ali Thabet to test IP address change from http://localhost to http://10.62.123.24:8080/ -->	
+  <param name="application.url">http://10.62.123.24:9080/${application.id}</param>	
+  <!--<param name="application.url">http://10.62.123.79:9080/${application.id}</param>-->
+  
   <param name="filter.login.class">org.kuali.rice.krad.web.filter.DummyLoginFilter</param>
   <param name="filtermapping.login.1">/*</param>
 
-  <param name="dev.mode">true</param>
+  <param name="dev.mode">false</param>
       
   <param name="datasource.ojb.platform">MySQL</param>  
   <param name="datasource.url">jdbc:mysql://localhost:3306/kd13rsk</param>

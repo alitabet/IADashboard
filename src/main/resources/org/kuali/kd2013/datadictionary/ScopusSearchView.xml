@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright 2005-2015 The Kuali Foundation
+
+    Licensed under the Educational Community License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+    http://www.opensource.org/licenses/ecl2.php
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+                    
+	<bean id="ScopusSearchView" parent="Uif-FormView" p:title="Scopus ID Search">
+	    <property name="formClass" value="org.kuali.kd2013.dataobject.ScopusSearchForm"/>
+		<property name="items">
+			<list>
+				<bean parent="ScopusSearchView-MainPage" p:id="mainPage"/>
+			</list>
+		</property>
+	</bean>            
+  	
+  	<bean id="ScopusSearchView-MainPage" parent="Uif-Page">
+  		 <property name="items">
+		     <list>
+			     <bean parent="ScopusSearchView-FacultyLookup"/>
+			     <bean parent="ScopusSearchView-ScopusIDs"/>
+		     </list>
+	     </property>
+  		 <property name="footer">
+  		   <bean parent="Uif-FooterBase">
+			<property name="items">
+				<list>
+				  <bean parent="Uif-PrimaryActionButton" p:methodToCall="submit" p:actionLabel="Submit" 
+				                         p:disabled="@{#empty(#dp.name)}"/>
+				  <bean parent="Uif-PrimaryActionButton" p:methodToCall="save" p:actionLabel="Save" 
+				                         p:disabled="@{#empty(#dp.name)}"/>
+				  <!--<bean parent="Uif-PrimaryActionButton" p:methodToCall="cancel" p:actionLabel="Cancel"/>-->
+				</list>
+			</property>
+		  </bean>
+	    </property>
+  	</bean>
+    
+    <bean id="ScopusSearchView-FacultyLookup" parent="Uif-GridSection" > <!--p:layoutManager.numberOfColumns="4">-->
+	    <property name="items">
+	      <list merge="true">
+	        <bean parent="Uif-InputField" p:label="KAUST Faculty Lookup" p:propertyName="name">
+	        	<property name="id" value="facultyQuickfinder"/>
+		        <property name="quickfinder">
+			        <bean parent="Uif-QuickFinder" p:dataObjectClassName="org.kuali.kd2013.dataobject.PrincipalInvestigator"
+			        							   p:viewName="PrincipalInvestigator-LookupView">
+		            	<property name="fieldConversions">
+			              	<map>
+			                	<entry key="name" value="name"/>
+			                	<!--<entry key="idNumber" value="pi.idNumber"/>
+			                	<entry key="scopusID" value="scopusIds"/>-->
+			                </map>
+		                </property>
+	                </bean>
+		        </property>
+		        <property name="control">
+		          <bean parent="Uif-TextControl" p:readOnly="true" p:size="21"/>
+		        </property>
+	        </bean> 
+	      </list>
+	    </property>
+	</bean>
+    
+    <bean id="ScopusSearchView-ScopusIDs" parent="Uif-Disclosure-TableCollectionSection">
+    	 <property name="progressiveRender" value="@{!#empty(#dp.scopusIds)}"/>
+         <property name="headerText" value="Scopus IDs"/>
+         <property name="collectionObjectClass" value="org.kuali.kd2013.dataobject.ScopusPI"/>
+         <property name="propertyName" value="scopusIds"/>
+         <property name="layoutManager.renderSequenceField" value="true"/>
+         <property name="renderAddBlankLineButton" value="true" />
+         <property name="addLinePlacement" value="TOP" />
+         <property name="lineActions">
+         	<list>
+         		<bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="deleteLine" p:actionLabel="delete"/>
+         		<bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="searchIdLine" p:actionLabel="search"/>
+         	</list>
+         </property>
+         <property name="items">
+           <list>
+				<bean parent="Uif-InputField" p:propertyName="scopusID" p:enableAutoInquiry="false" p:readOnly="@{!isAddedCollectionItem(#line)}"/>
+				<bean parent="Uif-DataField" p:propertyName="scopusName" />
+				<bean parent="Uif-DataField" p:propertyName="affiliation" />
+				<bean parent="Uif-DataField" p:propertyName="city" />
+				<bean parent="Uif-DataField" p:propertyName="country" />
+				<bean parent="Uif-DataField" p:propertyName="number_publications" />
+				<bean parent="Uif-DataField" p:propertyName="hIndex" />
+				<bean parent="Uif-DataField" p:propertyName="citedBy" />
+           </list>
+         </property>
+    </bean>
+
+</beans>
+
+
