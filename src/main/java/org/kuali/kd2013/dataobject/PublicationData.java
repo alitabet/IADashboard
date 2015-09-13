@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,13 +23,18 @@ import org.kuali.rice.krad.data.provider.annotation.UifDisplayHintType;
 import org.kuali.rice.krad.data.provider.annotation.UifDisplayHints;
 
 @Entity
-@Table(name="publications")
+@Table(name="publications_new")
 @UifAutoCreateViews({UifAutoCreateViewType.INQUIRY, UifAutoCreateViewType.LOOKUP})
 public class PublicationData implements Serializable {
 
 	private static final long serialVersionUID = 4768156680246084251L;
     
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+	@Label("ID")
+    @Column(name = "id")
+    private Integer id;
+    
     @Column(name = "eid",length=250)
     @Label("EID")
     private String eid; // EID
@@ -113,6 +120,14 @@ public class PublicationData implements Serializable {
 	@JoinColumn(name = "name",insertable=false, updatable=false)
     @InheritProperty(name = "name",label = @Label("Name of PI"), displayHints = @UifDisplayHints({@UifDisplayHint(value=UifDisplayHintType.NO_LOOKUP_CRITERIA)}))
     PrincipalInvestigator pi;
+    
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getEid() {
 		return eid;

@@ -34,18 +34,25 @@
     <property name="dataObjectClassName" value="org.kuali.kd2013.dataobject.PublicationData"/>
     <property name="criteriaFields">
       <list>
+      	<bean parent="Uif-LookupCriteriaInputField" p:propertyName="id"/>
         <bean parent="Uif-LookupCriteriaInputField" p:propertyName="eid"/>
         <bean parent="Uif-LookupCriteriaInputField" p:propertyName="name"/>
       </list>
     </property>
     <property name="resultFields">
       <list>
-		<bean parent="Uif-DataField" p:propertyName="eid" >
-		  <property name="inquiry">
+      	<bean parent="Uif-DataField" p:propertyName="id" p:enableAutoInquiry="false" />
+		 <!--  <property name="inquiry">
+			<bean parent="Uif-Inquiry" p:dataObjectClassName="org.kuali.kd2013.dataobject.PublicationData"
+			        				   p:viewName="PublicationData-InquiryView" p:inquiryParameters="id"/>
+		  </property>
+     	</bean>-->
+		<bean parent="Uif-DataField" p:propertyName="eid" />
+		<!--  <property name="inquiry">
 			<bean parent="Uif-Inquiry" p:dataObjectClassName="org.kuali.kd2013.dataobject.PublicationData"
 			        				   p:viewName="PublicationData-InquiryView" p:inquiryParameters="eid"/>
 		  </property>
-     	</bean>
+     	</bean>-->
 		<bean parent="Uif-DataField" p:propertyName="name" >
 		  <property name="inquiry">
 			<bean parent="Uif-Inquiry" p:dataObjectClassName="org.kuali.kd2013.dataobject.PrincipalInvestigator"

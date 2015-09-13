@@ -87,12 +87,13 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
               <property name="layoutManager.renderSequenceField" value="false"/>
               <property name="items">
                 <list>
-					<bean parent="Uif-DataField" p:propertyName="eid" >
-					  <property name="inquiry">
+					<bean parent="Uif-DataField" p:propertyName="id" p:enableAutoInquiry="false" />
+					<!--  <property name="inquiry">
 						<bean parent="Uif-Inquiry" p:dataObjectClassName="org.kuali.kd2013.dataobject.PublicationData"
-						        				   p:viewName="PublicationData-InquiryView" p:inquiryParameters="eid"/>
+						        				   p:viewName="PublicationData-InquiryView" p:inquiryParameters="id"/>
 					  </property>
-			     	</bean>
+			     	</bean>-->
+			     	<bean parent="Uif-DataField" p:propertyName="eid" />
 					<bean parent="Uif-DataField" p:propertyName="name" >
 					  <property name="inquiry">
 						<bean parent="Uif-Inquiry" p:dataObjectClassName="org.kuali.kd2013.dataobject.PrincipalInvestigator"

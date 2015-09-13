@@ -125,12 +125,13 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
               <property name="layoutManager.renderSequenceField" value="false"/>
               <property name="items">
                 <list>
-					<bean parent="Uif-DataField" p:propertyName="eid" >
-					  <property name="inquiry">
+					<bean parent="Uif-DataField" p:propertyName="id" p:enableAutoInquiry="false" />
+					<!--  <property name="inquiry">
 						<bean parent="Uif-Inquiry" p:dataObjectClassName="org.kuali.kd2013.dataobject.PublicationData"
-						        				   p:viewName="PublicationData-InquiryView" p:inquiryParameters="eid"/>
+						        				   p:viewName="PublicationData-InquiryView" p:inquiryParameters="id"/>
 					  </property>
-			     	</bean>
+			     	</bean>-->
+			     	<bean parent="Uif-DataField" p:propertyName="eid" />
 					<bean parent="Uif-DataField" p:propertyName="awardNumber">
 					  <property name="inquiry">
 			            <bean parent="Uif-Inquiry" p:dataObjectClassName="org.kuali.kd2013.dataobject.OcrfAward"
@@ -169,16 +170,16 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
              </bean>
 		</list>
 		</property>
-		<property name="footer">
+		<!--<property name="footer">
   		   <bean parent="Uif-FooterBase">
 			<property name="items">
 				<list>
 				  <bean parent="Uif-PrimaryActionButton" p:methodToCall="report" p:actionLabel="Report" />
-				                         <!--p:disabled="@{#empty(#dp.name)}"/>-->
+				                         p:disabled="@{#empty(#dp.name)}"/>
 				</list>
 			</property>
 		  </bean>
-	    </property>
+	    </property>-->
 	</bean>
 	
 	<bean id="PrincipalInvestigator" parent="DataObjectEntry"
