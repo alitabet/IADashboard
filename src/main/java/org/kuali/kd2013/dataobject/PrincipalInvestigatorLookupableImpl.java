@@ -1,12 +1,13 @@
 package org.kuali.kd2013.dataobject;
 
+import org.kuali.rice.krad.lookup.LookupForm;
+
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
-import org.kuali.rice.krad.lookup.LookupForm;
-import org.kuali.rice.krad.lookup.LookupableImpl;
-
-public class PrincipalInvestigatorLookupableImpl extends LookupableImpl {
+public class PrincipalInvestigatorLookupableImpl extends GeneralLookupableImp {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -17,20 +18,14 @@ public class PrincipalInvestigatorLookupableImpl extends LookupableImpl {
      */
     @Override
     public Collection<?> performSearch(LookupForm form, Map<String, String> searchCriteria, boolean bounded) {
-        
-		// PI Name
-		if (form.getLookupCriteria().containsKey("name")) {
-			String keyString = form.getLookupCriteria().get("name");
-		    searchCriteria.put("name", "*" + keyString + "*");
-		}
-		
-		// PI ID Number
-		if (form.getLookupCriteria().containsKey("idNumber")) {
-			String keyString = form.getLookupCriteria().get("idNumber");
-		    searchCriteria.put("idNumber", "*" + keyString + "*");
-		}
-		//InquiryForm form2;
-        return super.performSearch(form, searchCriteria,bounded);
+
+        StringBuilder sb = super.getKeywords(form, searchCriteria);
+
+        Map<String, Object> allResults = new HashMap<>();
+
+        super.performGeneralSearch(form, searchCriteria, bounded, new PrincipalInvestigator(), sb, allResults);
+
+        return new ArrayList<>(allResults.values());
     }
 
 }

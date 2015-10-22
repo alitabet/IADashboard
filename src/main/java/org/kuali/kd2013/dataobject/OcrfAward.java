@@ -1,12 +1,14 @@
 package org.kuali.kd2013.dataobject;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import org.kuali.rice.krad.data.provider.annotation.InheritProperty;
+import org.kuali.rice.krad.data.provider.annotation.KeyValuesFinderClass;
+import org.kuali.rice.krad.data.provider.annotation.Label;
+import org.kuali.rice.krad.data.provider.annotation.NonPersistentProperty;
+import org.kuali.rice.krad.data.provider.annotation.UifAutoCreateViewType;
+import org.kuali.rice.krad.data.provider.annotation.UifAutoCreateViews;
+import org.kuali.rice.krad.data.provider.annotation.UifDisplayHint;
+import org.kuali.rice.krad.data.provider.annotation.UifDisplayHintType;
+import org.kuali.rice.krad.data.provider.annotation.UifDisplayHints;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,21 +21,19 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import org.kuali.rice.krad.data.provider.annotation.InheritProperty;
-import org.kuali.rice.krad.data.provider.annotation.KeyValuesFinderClass;
-import org.kuali.rice.krad.data.provider.annotation.Label;
-import org.kuali.rice.krad.data.provider.annotation.NonPersistentProperty;
-import org.kuali.rice.krad.data.provider.annotation.UifAutoCreateViewType;
-import org.kuali.rice.krad.data.provider.annotation.UifAutoCreateViews;
-import org.kuali.rice.krad.data.provider.annotation.UifDisplayHint;
-import org.kuali.rice.krad.data.provider.annotation.UifDisplayHintType;
-import org.kuali.rice.krad.data.provider.annotation.UifDisplayHints;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 @Entity
 @Table(name="awards")
 @UifAutoCreateViews({UifAutoCreateViewType.INQUIRY, UifAutoCreateViewType.LOOKUP})
-public class OcrfAward implements Serializable {
+public class OcrfAward implements Serializable, DataObject {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -87,9 +87,9 @@ public class OcrfAward implements Serializable {
 	private String name;
 	
 	@Column(name="project_title",length=250)
-	@UifDisplayHints({
-		@UifDisplayHint(value=UifDisplayHintType.NO_LOOKUP_CRITERIA)
-	})
+//	@UifDisplayHints({
+//		@UifDisplayHint(value=UifDisplayHintType.NO_LOOKUP_CRITERIA)
+//	})
     @Label("Project Title") 
 	private String projectTitle; // Title of the project
 	
@@ -260,5 +260,17 @@ public class OcrfAward implements Serializable {
 	public void setContracts(List<Contract> contract) {
 		this.contracts = contract;
 	}
-	
+
+	@Override
+	public void addToCollection(Object obj, Map<String, Object> results) {
+        OcrfAward award = (OcrfAward) obj;
+        if (!results.containsKey(award.getAwardNumber())) results.put(award.getAwardNumber(), award);
+	}
+
+	@Override
+	public String[] getValues() {
+//        this.getAwardNumber().getClass().getName()
+        String[] values = {"awardNumber", "name", "projectTitle", "keyWords"};
+        return values;
+	}
 }

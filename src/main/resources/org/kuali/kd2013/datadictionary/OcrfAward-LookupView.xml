@@ -38,7 +38,7 @@
 		
 	<bean id="OcrfAward-LookupView" parent="Uif-LookupView">
     <property name="viewName" value="OcrfAward-LookupView"/>
-    <property name="viewHelperServiceClass" value="org.kuali.kd2013.dataobject.OcrfAwardLookupableImpl"/>
+    <property name="viewHelperServiceClass" value="org.kuali.kd2013.dataobject.GeneralLookupableImp"/>
     <property name="headerText" value="Awards Lookup View"/>
     <property name="dataObjectClassName" value="org.kuali.kd2013.dataobject.OcrfAward"/>
     <!--<property name="resultsGroup.layoutManager.groupingPropertyNames" >
@@ -48,7 +48,8 @@
     </property>-->
     <property name="criteriaFields">
       <list>
-        <bean parent="Uif-LookupCriteriaInputField" p:propertyName="awardNumber"/>
+        <bean parent="Uif-LookupCriteriaInputField" p:Label="Search" p:propertyName="keywordSearch" />
+        <bean parent="Uif-LookupCriteriaInputField" p:propertyName="awardNumber" />
         <bean parent="Uif-LookupCriteriaInputField" p:propertyName="name">
         <property name="quickfinder">
 	        <bean parent="Uif-QuickFinder" p:dataObjectClassName="org.kuali.kd2013.dataobject.PrincipalInvestigator"
@@ -61,8 +62,8 @@
             </bean>
         </property>
         </bean>
-        <bean parent="Uif-LookupCriteriaInputField" p:propertyName="keyWords" />
-        <bean parent="Uif-LookupCriteriaInputField" p:propertyName="type"/>
+        <bean parent="Uif-LookupCriteriaInputField" p:propertyName="projectTitle"/>
+        <bean parent="Uif-LookupCriteriaInputField" p:propertyName="keyWords"/>
       </list>
     </property>
     <property name="resultFields">

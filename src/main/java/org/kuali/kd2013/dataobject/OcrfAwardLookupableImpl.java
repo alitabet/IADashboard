@@ -1,14 +1,13 @@
 package org.kuali.kd2013.dataobject;
 
+import org.kuali.rice.krad.lookup.LookupForm;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import org.kuali.rice.krad.lookup.LookupForm;
-import org.kuali.rice.krad.lookup.LookupableImpl;
-
-public class OcrfAwardLookupableImpl extends LookupableImpl {
+public class OcrfAwardLookupableImpl extends GeneralLookupableImp {
 	private static final long serialVersionUID = 1L;
 
 	/**

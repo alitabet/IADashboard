@@ -52,11 +52,12 @@
       </list>
     </property>-->
     <property name="viewName" value="PrincipalInvestigator-LookupView"/>
-    <property name="viewHelperServiceClass" value="org.kuali.kd2013.dataobject.PrincipalInvestigatorLookupableImpl"/>
+    <property name="viewHelperServiceClass" value="org.kuali.kd2013.dataobject.GeneralLookupableImp"/>
     <property name="headerText" value="KAUST Faculty Lookup View"/>
     <property name="dataObjectClassName" value="org.kuali.kd2013.dataobject.PrincipalInvestigator"/>
     <property name="criteriaFields">
       <list>
+        <bean parent="Uif-LookupCriteriaInputField" p:Label="Keyword" p:propertyName="keywordSearch" />
         <bean parent="Uif-LookupCriteriaInputField" p:propertyName="name"/>
         <bean parent="Uif-LookupCriteriaInputField" p:propertyName="idNumber"/>
         <bean parent="Uif-LookupCriteriaInputField" p:propertyName="rank" />

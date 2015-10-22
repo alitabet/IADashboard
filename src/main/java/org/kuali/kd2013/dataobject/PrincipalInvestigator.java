@@ -1,22 +1,5 @@
 package org.kuali.kd2013.dataobject;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.JoinColumn;
-
 import org.kuali.rice.krad.data.provider.annotation.KeyValuesFinderClass;
 import org.kuali.rice.krad.data.provider.annotation.Label;
 import org.kuali.rice.krad.data.provider.annotation.NonPersistentProperty;
@@ -26,13 +9,30 @@ import org.kuali.rice.krad.data.provider.annotation.UifDisplayHint;
 import org.kuali.rice.krad.data.provider.annotation.UifDisplayHintType;
 import org.kuali.rice.krad.data.provider.annotation.UifDisplayHints;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+
 @Entity
 @Table(name="kaust_pi")
 @UifAutoCreateViews({UifAutoCreateViewType.INQUIRY, UifAutoCreateViewType.LOOKUP})
-public class PrincipalInvestigator implements Serializable {
+public class PrincipalInvestigator implements Serializable, DataObject {
 
 	private static final long serialVersionUID = 1L;
-    
+
     @Id
     @Column(name = "name",length=250)
     @Label("Name")
@@ -356,5 +356,16 @@ public class PrincipalInvestigator implements Serializable {
 	public void setContracts(List<Contract> contract) {
 		this.contracts = contract;
 	}
-	
+
+    @Override
+    public void addToCollection(Object obj, Map<String, Object> results) {
+        PrincipalInvestigator pi = (PrincipalInvestigator) obj;
+        if (!results.containsKey(pi.getName())) results.put(pi.getName(), pi);
+    }
+
+    @Override
+    public String[] getValues() {
+        String[] values = {"name", "idNumber"};
+        return values;
+    }
 }
