@@ -53,7 +53,8 @@ public class GeneralLookupableImp extends LookupableImpl {
                 String keyString = form.getLookupCriteria().get(str);
                 temp.append("*" + keyString + "*");
             }
-            if (temp.charAt(temp.length() - 1) == '|') temp.deleteCharAt(temp.length() - 1); // Remove last '|'
+            removeExtraChar(temp);
+//            if (temp.charAt(temp.length() - 1) == '|') temp.deleteCharAt(temp.length() - 1); // Remove last '|'
             localCriteria.put(str, temp.toString());
 
             for (String subStr : obj.getValues()) {
@@ -69,6 +70,15 @@ public class GeneralLookupableImp extends LookupableImpl {
             for (Object o : results) {
                 obj.addToCollection(o, allResults);
             }
+        }
+    }
+
+    // Remove extra '|' from StringBuilder with search criteria
+    private void removeExtraChar(StringBuilder sb) {
+        if (sb.length() <= 0) return;
+
+        if (sb.charAt(sb.length() - 1) == '|') {
+            sb.deleteCharAt(sb.length() - 1); // Remove last '|'
         }
     }
 

@@ -365,7 +365,7 @@ public class PrincipalInvestigator implements Serializable, DataObject {
 
     @Override
     public String[] getValues() {
-        String[] values = {"name", "idNumber"};
+        String[] values = {"name", "idNumber", "rank", "division", "center"};
         return values;
     }
 }

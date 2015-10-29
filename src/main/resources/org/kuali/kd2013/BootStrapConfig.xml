@@ -36,7 +36,7 @@ in configuration files outside of the project.
   <param name="app.code" override="false">rsk</param>
   
   <!-- Added by Ali Thabet to test IP address change from http://localhost to http://10.62.123.24:8080/ -->	
-  <param name="application.url">http://10.62.123.24:9080/${application.id}</param>	
+  <param name="application.url">http://10.62.123.24:9080/${application.id}</param>
   <!--<param name="application.url">http://10.62.123.79:9080/${application.id}</param>-->
   
   <param name="filter.login.class">org.kuali.rice.krad.web.filter.DummyLoginFilter</param>
