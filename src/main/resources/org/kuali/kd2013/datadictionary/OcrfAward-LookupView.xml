@@ -20,77 +20,91 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans         http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
-       
-	<bean id="OcrfAward" parent="DataObjectEntry"
-		p:dataObjectClass="org.kuali.kd2013.dataobject.OcrfAward" />
-		
-	<bean id="PrincipalInvestigator" parent="DataObjectEntry"
-		p:dataObjectClass="org.kuali.kd2013.dataobject.PrincipalInvestigator" />
-	
-	<bean id="OcrfSubAward" parent="DataObjectEntry"
-		p:dataObjectClass="org.kuali.kd2013.dataobject.OcrfSubAward" />
-	
-	<bean id="PublicationData" parent="DataObjectEntry"
-		p:dataObjectClass="org.kuali.kd2013.dataobject.PublicationData" />
-	
-	<bean id="PatentData" parent="DataObjectEntry"
-		p:dataObjectClass="org.kuali.kd2013.dataobject.PatentData" />
-		
-	<bean id="OcrfAward-LookupView" parent="Uif-LookupView">
-    <property name="viewName" value="OcrfAward-LookupView"/>
-    <property name="viewHelperServiceClass" value="org.kuali.kd2013.dataobject.GeneralLookupableImp"/>
-    <property name="headerText" value="Awards Lookup View"/>
-    <property name="dataObjectClassName" value="org.kuali.kd2013.dataobject.OcrfAward"/>
-    <!--<property name="resultsGroup.layoutManager.groupingPropertyNames" >
-    	<list>
-    		<value>type</value>
-    	</list>
-    </property>-->
-    <property name="criteriaFields">
-      <list>
-        <bean parent="Uif-LookupCriteriaInputField" p:Label="Search" p:propertyName="keywordSearch" />
-        <bean parent="Uif-LookupCriteriaInputField" p:propertyName="awardNumber" />
-        <bean parent="Uif-LookupCriteriaInputField" p:propertyName="name">
-        <property name="quickfinder">
-	        <bean parent="Uif-QuickFinder" p:dataObjectClassName="org.kuali.kd2013.dataobject.PrincipalInvestigator"
-	        							   p:viewName="PrincipalInvestigator-LookupView">
-            	<property name="fieldConversions">
-	              	<map>
-	                	<entry key="name" value="name"/>
-	                </map>
+
+    <bean id="OcrfAward" parent="DataObjectEntry"
+          p:dataObjectClass="org.kuali.kd2013.dataobject.OcrfAward"/>
+
+    <bean id="PrincipalInvestigator" parent="DataObjectEntry"
+          p:dataObjectClass="org.kuali.kd2013.dataobject.PrincipalInvestigator"/>
+
+    <bean id="OcrfSubAward" parent="DataObjectEntry"
+          p:dataObjectClass="org.kuali.kd2013.dataobject.OcrfSubAward"/>
+
+    <bean id="PublicationData" parent="DataObjectEntry"
+          p:dataObjectClass="org.kuali.kd2013.dataobject.PublicationData"/>
+
+    <bean id="PatentData" parent="DataObjectEntry"
+          p:dataObjectClass="org.kuali.kd2013.dataobject.PatentData"/>
+
+    <bean id="OcrfAward-LookupView" parent="Uif-LookupView">
+        <property name="viewName" value="OcrfAward-LookupView"/>
+        <property name="viewHelperServiceClass" value="org.kuali.kd2013.dataobject.GeneralLookupableImp"/>
+        <property name="headerText" value="Awards Lookup View"/>
+        <property name="dataObjectClassName" value="org.kuali.kd2013.dataobject.OcrfAward"/>
+        <!--<property name="resultsGroup.layoutManager.groupingPropertyNames" >
+            <list>
+                <value>type</value>
+            </list>
+        </property>-->
+        <property name="criteriaFields">
+            <list>
+                <bean parent="Uif-LookupCriteriaInputField" p:Label="Search" p:propertyName="keywordSearch"/>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="awardNumber"/>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="name">
+                    <property name="quickfinder">
+                        <bean parent="Uif-QuickFinder"
+                              p:dataObjectClassName="org.kuali.kd2013.dataobject.PrincipalInvestigator"
+                              p:viewName="PrincipalInvestigator-LookupView">
+                            <property name="fieldConversions">
+                                <map>
+                                    <entry key="name" value="name"/>
+                                </map>
+                            </property>
+                        </bean>
+                    </property>
+                </bean>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="coPis"/>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="projectTitle"/>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="keyWords"/>
+            </list>
+        </property>
+        <property name="resultFields">
+            <list>
+                <bean parent="Uif-DataField" p:propertyName="awardProgramString"/>
+                <bean parent="Uif-DataField" p:propertyName="awardNumber">
+                    <property name="inquiry">
+                        <bean parent="Uif-Inquiry" p:dataObjectClassName="org.kuali.kd2013.dataobject.OcrfAward"
+                              p:viewName="OcrfAward-InquiryView"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-DataField" p:propertyName="name">
+                    <property name="inquiry">
+                        <bean parent="Uif-Inquiry"
+                              p:dataObjectClassName="org.kuali.kd2013.dataobject.PrincipalInvestigator"
+                              p:viewName="PrincipalInvestigator-InquiryView" p:inquiryParameters="name"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-DataField" p:propertyName="pi.division"/>
+                <bean parent="Uif-DataField" p:propertyName="pi.center"/>
+                <bean parent="Uif-DataField" p:propertyName="coPis"/>
+                <bean parent="Uif-DataField" p:propertyName="type"/>
+                <bean parent="Uif-DataField" p:propertyName="projectTitle"/>
+                <bean parent="Uif-DataField" p:propertyName="keyWords"/>
+                <bean parent="Uif-DataField" p:propertyName="startDate"/>
+                <bean parent="Uif-DataField" p:propertyName="endDate"/>
+                <bean parent="Uif-DataField" p:propertyName="totalBudget">
+                </bean>
+            </list>
+        </property>
+        <property name="footer">
+            <bean parent="Uif-FooterBase">
+                <property name="items">
+                    <list>
+                        <bean parent="Uif-LinkField" p:Label="Award Distribution Charts" p:href="http://10.62.123.24:8080/webapp/home"
+                              p:linkText="Charts"/>
+                    </list>
                 </property>
             </bean>
         </property>
-        </bean>
-        <bean parent="Uif-LookupCriteriaInputField" p:propertyName="projectTitle"/>
-        <bean parent="Uif-LookupCriteriaInputField" p:propertyName="keyWords"/>
-      </list>
-    </property>
-    <property name="resultFields">
-      <list>
-		<bean parent="Uif-DataField" p:propertyName="awardProgramString" />
-		<bean parent="Uif-DataField" p:propertyName="awardNumber">
-         <property name="inquiry">
-			<bean parent="Uif-Inquiry" p:dataObjectClassName="org.kuali.kd2013.dataobject.OcrfAward"
-		        				   p:viewName="OcrfAward-InquiryView"/>
-	     </property>
-	    </bean>
-		<bean parent="Uif-DataField" p:propertyName="name">
-		  <property name="inquiry">
-			<bean parent="Uif-Inquiry" p:dataObjectClassName="org.kuali.kd2013.dataobject.PrincipalInvestigator"
-			      p:viewName="PrincipalInvestigator-InquiryView" p:inquiryParameters="name"/>
-		  </property>
-     	</bean>
-     	<bean parent="Uif-DataField" p:propertyName="pi.division" />
-     	<bean parent="Uif-DataField" p:propertyName="pi.center" />
-		<bean parent="Uif-DataField" p:propertyName="type" />
-		<bean parent="Uif-DataField" p:propertyName="projectTitle" />
-		<bean parent="Uif-DataField" p:propertyName="keyWords" />
-		<bean parent="Uif-DataField" p:propertyName="startDate" />
-		<bean parent="Uif-DataField" p:propertyName="endDate" />
-		<bean parent="Uif-DataField" p:propertyName="totalBudget" >
-        </bean>
-      </list>
-    </property>
-  </bean>
+    </bean>
 </beans>

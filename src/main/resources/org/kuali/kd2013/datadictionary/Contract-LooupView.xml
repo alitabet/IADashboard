@@ -20,96 +20,87 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans         http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
-    
+
     <bean id="Contract" parent="DataObjectEntry"
-		p:dataObjectClass="org.kuali.kd2013.dataobject.Contract" />
-		
-	<bean id="PrincipalInvestigator" parent="DataObjectEntry"
-		p:dataObjectClass="org.kuali.kd2013.dataobject.PrincipalInvestigator" />
-	
-	<bean id="OcrfAward" parent="DataObjectEntry"
-		p:dataObjectClass="org.kuali.kd2013.dataobject.OcrfAward" />
-			
-	<bean id="Contract-LookupView" parent="Uif-LookupView">
-    <property name="viewName" value="ContractLookupView"/>
-    <property name="viewHelperServiceClass" value="org.kuali.kd2013.dataobject.ContractLookupableImpl"/>
-    <property name="headerText" value="Contracts Lookup View"/>
-    <property name="dataObjectClassName" value="org.kuali.kd2013.dataobject.Contract"/>
-    <property name="multipleValuesSelectResultSetLimit" value="5000"/>
-    <property name="resultSetLimit" value="5000"/>
-    <property name="criteriaFields">
-      <list>
-        <bean parent="Uif-LookupCriteriaInputField" p:propertyName="orsNumber"/>
-        <bean parent="Uif-LookupCriteriaInputField" p:propertyName="name">
-         <property name="quickfinder">
-	        <bean parent="Uif-QuickFinder" p:dataObjectClassName="org.kuali.kd2013.dataobject.PrincipalInvestigator"
-	        							   p:viewName="PrincipalInvestigator-LookupView">
-            	<property name="fieldConversions">
-	              	<map>
-	                	<entry key="name" value="name"/>
-	                </map>
-                </property>
-            </bean>
-         </property>
-        </bean>
-        <!--<bean parent="Uif-LookupCriteriaInputField" p:propertyName="awardNumber">
-         <property name="quickfinder">
-	        <bean parent="Uif-QuickFinder" p:dataObjectClassName="org.kuali.kd2013.dataobject.OcrfAward"
-	        							   p:viewName="PrincipalInvestigator-OcrfAward">
-            	<property name="fieldConversions">
-	              	<map>
-	                	<entry key="awardNumber" value="awardNumber"/>
-	                </map>
-                </property>
-            </bean>
-         </property>
-        </bean>-->
-        <bean parent="Uif-LookupCriteriaInputField" p:propertyName="institution"/>
-        <bean parent="Uif-LookupCriteriaInputField" p:propertyName="collaborator"/>
-        <bean parent="Uif-LookupCriteriaInputField" p:propertyName="contractType"/>
-        <bean parent="Uif-LookupCriteriaInputField" p:propertyName="division"/>
-      </list>
-    </property>
-    <property name="resultFields">
-      <list>
-		<bean parent="Uif-DataField" p:propertyName="orsNumber" >
-		 <property name="inquiry">
-           <bean parent="Uif-Inquiry" p:dataObjectClassName="org.kuali.kd2013.dataobject.Contract"
-			        				   p:viewName="Contract-InquiryView" p:inquiryParameters="orsNumber"/>
-         </property>
-		</bean>
-		<bean parent="Uif-DataField" p:propertyName="sponsor" />
-		<bean parent="Uif-DataField" p:propertyName="division" />
-		<bean parent="Uif-DataField" p:propertyName="name">
-		  <property name="inquiry">
-			<bean parent="Uif-Inquiry" p:dataObjectClassName="org.kuali.kd2013.dataobject.PrincipalInvestigator"
-			        				   p:viewName="PrincipalInvestigator-InquiryView" p:inquiryParameters="name"/>
-		  </property>
-     	</bean>
-		<bean parent="Uif-DataField" p:propertyName="awardNumber">
-		  <property name="inquiry">
-            <bean parent="Uif-Inquiry" p:dataObjectClassName="org.kuali.kd2013.dataobject.OcrfAward"
-			        				   p:viewName="OcrfAward-InquiryView" p:inquiryParameters="awardNumber"/>
-          </property>
-		</bean>
-		<bean parent="Uif-DataField" p:propertyName="coI" />
-		<bean parent="Uif-DataField" p:propertyName="institution" />
-		<bean parent="Uif-DataField" p:propertyName="collaborator" />
-		<bean parent="Uif-DataField" p:propertyName="kaustRole" />
-		<bean parent="Uif-DataField" p:propertyName="contractType" />
-		<bean parent="Uif-DataField" p:propertyName="status" />
-		<bean parent="Uif-DataField" p:propertyName="agreementStart" />
-		<bean parent="Uif-DataField" p:propertyName="agreementEnd" />
-		<bean parent="Uif-DataField" p:propertyName="fundingKaustString" />
-		<bean parent="Uif-DataField" p:propertyName="fundingCollaboratorString" />
-		<bean parent="Uif-DataField" p:propertyName="totalFundingString" />
-		<bean parent="Uif-DataField" p:propertyName="kaustContributionString" />
-      </list>
-    </property>
-    <!--<property name="page.instructionalText">
-      <value>
-                Search awards by entering a values into [b]EID[/b], [b]Award number[/b], [b]KAUST Author[/b]
-      </value>
-    </property>-->
-  </bean>
+          p:dataObjectClass="org.kuali.kd2013.dataobject.Contract"/>
+
+    <bean id="PrincipalInvestigator" parent="DataObjectEntry"
+          p:dataObjectClass="org.kuali.kd2013.dataobject.PrincipalInvestigator"/>
+
+    <bean id="OcrfAward" parent="DataObjectEntry"
+          p:dataObjectClass="org.kuali.kd2013.dataobject.OcrfAward"/>
+
+    <bean id="Contract-LookupView" parent="Uif-LookupView">
+        <property name="viewName" value="ContractLookupView"/>
+        <property name="viewHelperServiceClass" value="org.kuali.kd2013.dataobject.GeneralLookupableImp"/>
+        <property name="headerText" value="Contracts Lookup View"/>
+        <property name="dataObjectClassName" value="org.kuali.kd2013.dataobject.Contract"/>
+        <!--<property name="multipleValuesSelectResultSetLimit" value="5000"/>-->
+        <!--<property name="resultSetLimit" value="5000"/>-->
+        <property name="criteriaFields">
+            <list>
+                <bean parent="Uif-LookupCriteriaInputField" p:Label="Keyword" p:propertyName="keywordSearch"/>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="orsNumber"/>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="name">
+                    <property name="quickfinder">
+                        <bean parent="Uif-QuickFinder"
+                              p:dataObjectClassName="org.kuali.kd2013.dataobject.PrincipalInvestigator"
+                              p:viewName="PrincipalInvestigator-LookupView">
+                            <property name="fieldConversions">
+                                <map>
+                                    <entry key="name" value="name"/>
+                                </map>
+                            </property>
+                        </bean>
+                    </property>
+                </bean>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="institution"/>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="collaborator"/>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="contractType"/>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="division"/>
+            </list>
+        </property>
+        <property name="resultFields">
+            <list>
+                <bean parent="Uif-DataField" p:propertyName="orsNumber">
+                    <property name="inquiry">
+                        <bean parent="Uif-Inquiry" p:dataObjectClassName="org.kuali.kd2013.dataobject.Contract"
+                              p:viewName="Contract-InquiryView" p:inquiryParameters="orsNumber"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-DataField" p:propertyName="sponsor"/>
+                <bean parent="Uif-DataField" p:propertyName="division"/>
+                <bean parent="Uif-DataField" p:propertyName="name">
+                    <property name="inquiry">
+                        <bean parent="Uif-Inquiry"
+                              p:dataObjectClassName="org.kuali.kd2013.dataobject.PrincipalInvestigator"
+                              p:viewName="PrincipalInvestigator-InquiryView" p:inquiryParameters="name"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-DataField" p:propertyName="awardNumber">
+                    <property name="inquiry">
+                        <bean parent="Uif-Inquiry" p:dataObjectClassName="org.kuali.kd2013.dataobject.OcrfAward"
+                              p:viewName="OcrfAward-InquiryView" p:inquiryParameters="awardNumber"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-DataField" p:propertyName="coI"/>
+                <bean parent="Uif-DataField" p:propertyName="institution"/>
+                <bean parent="Uif-DataField" p:propertyName="collaborator"/>
+                <bean parent="Uif-DataField" p:propertyName="kaustRole"/>
+                <bean parent="Uif-DataField" p:propertyName="contractType"/>
+                <bean parent="Uif-DataField" p:propertyName="status"/>
+                <bean parent="Uif-DataField" p:propertyName="agreementStart"/>
+                <bean parent="Uif-DataField" p:propertyName="agreementEnd"/>
+                <bean parent="Uif-DataField" p:propertyName="fundingKaustString"/>
+                <bean parent="Uif-DataField" p:propertyName="fundingCollaboratorString"/>
+                <bean parent="Uif-DataField" p:propertyName="totalFundingString"/>
+                <bean parent="Uif-DataField" p:propertyName="kaustContributionString"/>
+            </list>
+        </property>
+        <!--<property name="page.instructionalText">
+          <value>
+                    Search awards by entering a values into [b]EID[/b], [b]Award number[/b], [b]KAUST Author[/b]
+          </value>
+        </property>-->
+    </bean>
 </beans>

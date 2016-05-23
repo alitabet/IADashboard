@@ -342,7 +342,7 @@ public class PublicationData implements Serializable, DataObject {
 
     @Override
     public String[] getValues() {
-        String[] values = {"name"};
+        String[] values = {"name", "title", "affiliations", "authors"};
         return values;
     }
 }

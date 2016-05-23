@@ -20,72 +20,87 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans         http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
-    
+
     <bean id="PublicationData" parent="DataObjectEntry"
-        p:dataObjectClass="org.kuali.kd2013.dataobject.PublicationData" />
+          p:dataObjectClass="org.kuali.kd2013.dataobject.PublicationData"/>
 
     <bean id="PrincipalInvestigator" parent="DataObjectEntry"
-        p:dataObjectClass="org.kuali.kd2013.dataobject.PrincipalInvestigator" />
+          p:dataObjectClass="org.kuali.kd2013.dataobject.PrincipalInvestigator"/>
 
     <bean id="PublicationData-LookupView" parent="Uif-LookupView">
-    <property name="viewName" value="PublicationData-LookupView"/>
-    <property name="viewHelperServiceClass" value="org.kuali.kd2013.dataobject.GeneralLookupableImp"/>
-    <property name="headerText" value="Publications Lookup View"/>
-    <property name="dataObjectClassName" value="org.kuali.kd2013.dataobject.PublicationData"/>
-    <property name="multipleValuesSelectResultSetLimit" value="5000"/>
-    <property name="resultSetLimit" value="5000"/>
-    <property name="criteriaFields">
-      <list>
-          <bean parent="Uif-LookupCriteriaInputField" p:Label="Keyword" p:propertyName="keywordSearch" />
-          <bean parent="Uif-LookupCriteriaInputField" p:propertyName="name"/>
-          <bean parent="Uif-LookupCriteriaInputField" p:propertyName="division"/>
-          <bean parent="Uif-LookupCriteriaInputField" p:propertyName="center"/>
-          <bean parent="Uif-LookupCriteriaInputField" p:propertyName="date" p:ranged="true" />
-      </list>
-    </property>
-    <property name="resultFields">
-      <list>
-        <bean parent="Uif-DataField" p:propertyName="name" >
-          <property name="inquiry">
-            <bean parent="Uif-Inquiry" p:dataObjectClassName="org.kuali.kd2013.dataobject.PrincipalInvestigator"
-                                       p:viewName="PrincipalInvestigator-InquiryView" p:inquiryParameters="name"/>
-          </property>
-        </bean>
-        <bean parent="Uif-DataField" p:propertyName="division" />
-        <bean parent="Uif-DataField" p:propertyName="center" />
-        <bean parent="Uif-DataField" p:propertyName="program" />
-        <bean parent="Uif-DataField" p:propertyName="awardNumber">
-          <property name="inquiry">
-            <bean parent="Uif-Inquiry" p:dataObjectClassName="org.kuali.kd2013.dataobject.OcrfAward"
-                                       p:viewName="OcrfAward-InquiryView" p:inquiryParameters="awardNumber"/>
-          </property>
-        </bean>
+        <property name="viewName" value="PublicationData-LookupView"/>
+        <property name="viewHelperServiceClass" value="org.kuali.kd2013.dataobject.GeneralLookupableImp"/>
+        <property name="headerText" value="Publications Lookup View"/>
+        <property name="dataObjectClassName" value="org.kuali.kd2013.dataobject.PublicationData"/>
+        <!--<property name="multipleValuesSelectResultSetLimit" value="5000"/>-->
+        <!--<property name="resultSetLimit" value="5000"/>-->
+        <property name="criteriaFields">
+            <list>
+                <bean parent="Uif-LookupCriteriaInputField" p:Label="Keyword" p:propertyName="keywordSearch"/>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="name"/>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="title"/>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="affiliations"/>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="authors"/>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="division"/>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="center"/>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="date" p:ranged="true"/>
+            </list>
+        </property>
+        <property name="resultFields">
+            <list>
+                <bean parent="Uif-DataField" p:propertyName="name">
+                    <property name="inquiry">
+                        <bean parent="Uif-Inquiry"
+                              p:dataObjectClassName="org.kuali.kd2013.dataobject.PrincipalInvestigator"
+                              p:viewName="PrincipalInvestigator-InquiryView" p:inquiryParameters="name"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-DataField" p:propertyName="division"/>
+                <bean parent="Uif-DataField" p:propertyName="center"/>
+                <bean parent="Uif-DataField" p:propertyName="program"/>
+                <bean parent="Uif-DataField" p:propertyName="awardNumber">
+                    <property name="inquiry">
+                        <bean parent="Uif-Inquiry" p:dataObjectClassName="org.kuali.kd2013.dataobject.OcrfAward"
+                              p:viewName="OcrfAward-InquiryView" p:inquiryParameters="awardNumber"/>
+                    </property>
+                </bean>
 
-          <bean parent="Uif-DataField" p:propertyName="authors" />
-          <bean parent="Uif-DataField" p:propertyName="title" />
-          <bean parent="Uif-DataField" p:propertyName="year" />
-          <bean parent="Uif-DataField" p:propertyName="source" />
-          <bean parent="Uif-DataField" p:propertyName="volume" />
-          <bean parent="Uif-DataField" p:propertyName="issue" />
-          <bean parent="Uif-DataField" p:propertyName="articleNumber" />
-          <bean parent="Uif-DataField" p:propertyName="pageStart" />
-          <bean parent="Uif-DataField" p:propertyName="pageEnd" />
-          <bean parent="Uif-DataField" p:propertyName="pageCount" />
-          <bean parent="Uif-DataField" p:propertyName="citedBy" />
-          <bean parent="Uif-DataField" p:propertyName="doi" />
-          <bean parent="Uif-DataField" p:propertyName="link" />
-          <bean parent="Uif-DataField" p:propertyName="affiliations" />
-          <bean parent="Uif-DataField" p:propertyName="authorsAffiliations" />
-          <bean parent="Uif-DataField" p:propertyName="abstract" />
-          <bean parent="Uif-DataField" p:propertyName="type" />
-          <bean parent="Uif-DataField" p:propertyName="scopusSource" />
-          <bean parent="Uif-DataField" p:propertyName="eid" />
-      </list>
-    </property>
-    <!--<property name="page.instructionalText">
-      <value>
-                Search awards by entering a values into [b]EID[/b], [b]Award number[/b], [b]KAUST Author[/b]
-      </value>
-    </property>-->
-  </bean>
+                <bean parent="Uif-DataField" p:propertyName="authors"/>
+                <bean parent="Uif-DataField" p:propertyName="title"/>
+                <bean parent="Uif-DataField" p:propertyName="year"/>
+                <bean parent="Uif-DataField" p:propertyName="source"/>
+                <bean parent="Uif-DataField" p:propertyName="volume"/>
+                <bean parent="Uif-DataField" p:propertyName="issue"/>
+                <bean parent="Uif-DataField" p:propertyName="articleNumber"/>
+                <bean parent="Uif-DataField" p:propertyName="pageStart"/>
+                <bean parent="Uif-DataField" p:propertyName="pageEnd"/>
+                <bean parent="Uif-DataField" p:propertyName="pageCount"/>
+                <bean parent="Uif-DataField" p:propertyName="citedBy"/>
+                <bean parent="Uif-DataField" p:propertyName="doi"/>
+                <bean parent="Uif-DataField" p:propertyName="link"/>
+                <bean parent="Uif-DataField" p:propertyName="affiliations"/>
+                <bean parent="Uif-DataField" p:propertyName="authorsAffiliations"/>
+                <bean parent="Uif-DataField" p:propertyName="abstract"/>
+                <bean parent="Uif-DataField" p:propertyName="type"/>
+                <bean parent="Uif-DataField" p:propertyName="scopusSource"/>
+                <bean parent="Uif-DataField" p:propertyName="eid"/>
+            </list>
+        </property>
+        <property name="footer">
+            <bean parent="Uif-FooterBase">
+                <property name="items">
+                    <list>
+                        <bean parent="Uif-LinkField" p:Label="KAUST Faculty Publication Charts"
+                              p:href="http://10.62.123.24:8080/webapp/"
+                              p:linkText="Charts"/>
+                    </list>
+                </property>
+            </bean>
+        </property>
+        <!--<property name="page.instructionalText">
+          <value>
+                    Search awards by entering a values into [b]EID[/b], [b]Award number[/b], [b]KAUST Author[/b]
+          </value>
+        </property>-->
+    </bean>
 </beans>

@@ -101,6 +101,10 @@ public class OcrfAward implements Serializable, DataObject {
     @Label("Type") 
 	@KeyValuesFinderClass(AwardTypeValuesFinder.class)
 	private String type; // Type of Proposal
+
+	@Column(name="co_pis",length=500)
+    @Label("Co-PIs")
+    private String coPis;
 	
 	@Column(name="begin_date")
 	@UifDisplayHints({
@@ -213,7 +217,15 @@ public class OcrfAward implements Serializable, DataObject {
 		this.type = type;
 	}
 
-	public Date getStartDate() {
+    public String getCoPis() {
+        return coPis;
+    }
+
+    public void setCoPis(String coPis) {
+        this.coPis = coPis;
+    }
+
+    public Date getStartDate() {
 		return startDate;
 	}
 
@@ -270,7 +282,7 @@ public class OcrfAward implements Serializable, DataObject {
 	@Override
 	public String[] getValues() {
 //        this.getAwardNumber().getClass().getName()
-        String[] values = {"awardNumber", "name", "projectTitle", "keyWords"};
+        String[] values = {"awardNumber", "name", "coPis", "projectTitle", "keyWords"};
         return values;
 	}
 }

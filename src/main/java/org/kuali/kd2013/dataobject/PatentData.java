@@ -1,8 +1,12 @@
 package org.kuali.kd2013.dataobject;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import org.kuali.rice.krad.data.provider.annotation.Label;
+import org.kuali.rice.krad.data.provider.annotation.NonPersistentProperty;
+import org.kuali.rice.krad.data.provider.annotation.UifAutoCreateViewType;
+import org.kuali.rice.krad.data.provider.annotation.UifAutoCreateViews;
+import org.kuali.rice.krad.data.provider.annotation.UifDisplayHint;
+import org.kuali.rice.krad.data.provider.annotation.UifDisplayHintType;
+import org.kuali.rice.krad.data.provider.annotation.UifDisplayHints;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,19 +17,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
-import org.kuali.rice.krad.data.provider.annotation.Label;
-import org.kuali.rice.krad.data.provider.annotation.NonPersistentProperty;
-import org.kuali.rice.krad.data.provider.annotation.UifAutoCreateViewType;
-import org.kuali.rice.krad.data.provider.annotation.UifAutoCreateViews;
-import org.kuali.rice.krad.data.provider.annotation.UifDisplayHint;
-import org.kuali.rice.krad.data.provider.annotation.UifDisplayHintType;
-import org.kuali.rice.krad.data.provider.annotation.UifDisplayHints;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Entity
 @Table(name="ip_data")
 @UifAutoCreateViews({UifAutoCreateViewType.INQUIRY, UifAutoCreateViewType.LOOKUP})
-public class PatentData implements Serializable {
+public class PatentData implements Serializable, DataObject {
 
 	private static final long serialVersionUID = 1L;
     
@@ -315,5 +315,16 @@ public class PatentData implements Serializable {
 	public void setFaculty(List<PrincipalInvestigator> faculty) {
 		this.faculty = faculty;
 	}
-	
+
+	@Override
+	public void addToCollection(Object obj, Map<String, Object> results) {
+		PatentData patentData = (PatentData) obj;
+		if (!results.containsKey(patentData.getPublicationNumber())) results.put(patentData.getPublicationNumber(), patentData);
+	}
+
+	@Override
+	public String[] getValues() {
+		String[] values = {"status", "source", "title", "assignee"};
+		return values;
+	}
 }

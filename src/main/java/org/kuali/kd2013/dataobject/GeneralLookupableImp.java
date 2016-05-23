@@ -34,7 +34,7 @@ public class GeneralLookupableImp extends LookupableImpl {
             Object obj = Class.forName(form.getDataObjectClassName()).getConstructor().newInstance();
             performGeneralSearch(form, searchCriteria, bounded, (DataObject) obj, sb, allResults);
         } catch (Exception e) {
-            throw new RuntimeException("Error instantiating class " + form.getDataObjectClassName() + e.getMessage());
+            throw new RuntimeException("Error instantiating class " + form.getDataObjectClassName() + " " + e.getMessage());
 //            LOG.error("Error instantiating class " + form.getDataObjectClassName(), e);
         }
 

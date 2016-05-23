@@ -20,76 +20,77 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans         http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
-	
-	<bean id="PrincipalInvestigator" parent="DataObjectEntry"
-		p:dataObjectClass="org.kuali.kd2013.dataobject.PrincipalInvestigator" />
-		
-	<bean id="OcrfAward" parent="DataObjectEntry"
-		p:dataObjectClass="org.kuali.kd2013.dataobject.OcrfAward" />
 
-	<bean id="OcrfSubAward" parent="DataObjectEntry"
-		p:dataObjectClass="org.kuali.kd2013.dataobject.OcrfSubAward" />
-	
-	<bean id="ScopusPI" parent="DataObjectEntry"
-		p:dataObjectClass="org.kuali.kd2013.dataobject.ScopusPI" />
-	
-	<bean id="PublicationData" parent="DataObjectEntry"
-		p:dataObjectClass="org.kuali.kd2013.dataobject.PublicationData" />
-	
-	<bean id="PatentData" parent="DataObjectEntry"
-		p:dataObjectClass="org.kuali.kd2013.dataobject.PatentData" />
-		
-	<bean id="Contract" parent="DataObjectEntry"
-		p:dataObjectClass="org.kuali.kd2013.dataobject.Contract" />
-	
-	<bean id="PrincipalInvestigator-LookupView" parent="Uif-LookupView">
-	<!--<property name="additionalCssFiles">
-      <list>
-      <value>css/test.css</value>
-        <value>css/main.css</value>
-       	<value>css/font-awesome.min.css</value>
-       	<value>css/ie9.css</value>
-      </list>
-    </property>-->
-    <property name="viewName" value="PrincipalInvestigator-LookupView"/>
-    <property name="viewHelperServiceClass" value="org.kuali.kd2013.dataobject.GeneralLookupableImp"/>
-    <property name="headerText" value="KAUST Faculty Lookup View"/>
-    <property name="dataObjectClassName" value="org.kuali.kd2013.dataobject.PrincipalInvestigator"/>
-    <property name="criteriaFields">
-      <list>
-        <bean parent="Uif-LookupCriteriaInputField" p:Label="Keyword" p:propertyName="keywordSearch" />
-        <bean parent="Uif-LookupCriteriaInputField" p:propertyName="name"/>
-        <bean parent="Uif-LookupCriteriaInputField" p:propertyName="idNumber"/>
-        <bean parent="Uif-LookupCriteriaInputField" p:propertyName="rank" />
-        <bean parent="Uif-LookupCriteriaInputField" p:propertyName="division"/>
-        <bean parent="Uif-LookupCriteriaInputField" p:propertyName="center"/>
-      </list>
-    </property>
-    <property name="resultFields">
-      <list>
-        <bean parent="Uif-DataField" p:propertyName="name">
-		  <property name="inquiry">
-			<bean parent="Uif-Inquiry" p:dataObjectClassName="org.kuali.kd2013.dataobject.PrincipalInvestigator"
-			      p:viewName="PrincipalInvestigator-InquiryView" p:inquiryParameters="name"/>
-		  </property>
-     	</bean>
-		<bean parent="Uif-DataField" p:propertyName="idNumber" />
-		<bean parent="Uif-DataField" p:propertyName="division" />
-		<bean parent="Uif-DataField" p:propertyName="rank" />
-		<bean parent="Uif-DataField" p:propertyName="center" />
-		<bean parent="Uif-DataField" p:propertyName="program" />
-		<bean parent="Uif-LinkField" p:Label="Email" p:href="mailto:@{#line.email}" p:linkText="@{#line.email}" />
-		<bean parent="Uif-DataField" p:propertyName="scopusIDString" />
-		<bean parent="Uif-DataField" p:propertyName="scopusNumberPublications" />
-		<bean parent="Uif-DataField" p:propertyName="scopusHIndex" />
-      </list>
-    </property>
-    <!--<property name="page.instructionalText">
-      <value>
-                Search KAUST faculty by entering a value into [b]Name[/b] and/or
-                [b]ID Number[/b][br/]
-                Other values provide drop-down list options.
-      </value>
-    </property>-->
-  </bean>
+    <bean id="PrincipalInvestigator" parent="DataObjectEntry"
+          p:dataObjectClass="org.kuali.kd2013.dataobject.PrincipalInvestigator"/>
+
+    <bean id="OcrfAward" parent="DataObjectEntry"
+          p:dataObjectClass="org.kuali.kd2013.dataobject.OcrfAward"/>
+
+    <bean id="OcrfSubAward" parent="DataObjectEntry"
+          p:dataObjectClass="org.kuali.kd2013.dataobject.OcrfSubAward"/>
+
+    <bean id="ScopusPI" parent="DataObjectEntry"
+          p:dataObjectClass="org.kuali.kd2013.dataobject.ScopusPI"/>
+
+    <bean id="PublicationData" parent="DataObjectEntry"
+          p:dataObjectClass="org.kuali.kd2013.dataobject.PublicationData"/>
+
+    <bean id="PatentData" parent="DataObjectEntry"
+          p:dataObjectClass="org.kuali.kd2013.dataobject.PatentData"/>
+
+    <bean id="Contract" parent="DataObjectEntry"
+          p:dataObjectClass="org.kuali.kd2013.dataobject.Contract"/>
+
+    <bean id="PrincipalInvestigator-LookupView" parent="Uif-LookupView">
+        <!--<property name="additionalCssFiles">
+          <list>
+          <value>css/test.css</value>
+            <value>css/main.css</value>
+               <value>css/font-awesome.min.css</value>
+               <value>css/ie9.css</value>
+          </list>
+        </property>-->
+        <property name="viewName" value="PrincipalInvestigator-LookupView"/>
+        <property name="viewHelperServiceClass" value="org.kuali.kd2013.dataobject.GeneralLookupableImp"/>
+        <property name="headerText" value="KAUST Faculty Lookup View"/>
+        <property name="dataObjectClassName" value="org.kuali.kd2013.dataobject.PrincipalInvestigator"/>
+        <property name="criteriaFields">
+            <list>
+                <bean parent="Uif-LookupCriteriaInputField" p:Label="Keyword" p:propertyName="keywordSearch"/>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="name"/>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="idNumber"/>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="rank"/>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="division"/>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="center"/>
+            </list>
+        </property>
+        <property name="resultFields">
+            <list>
+                <bean parent="Uif-DataField" p:propertyName="name">
+                    <property name="inquiry">
+                        <bean parent="Uif-Inquiry"
+                              p:dataObjectClassName="org.kuali.kd2013.dataobject.PrincipalInvestigator"
+                              p:viewName="PrincipalInvestigator-InquiryView" p:inquiryParameters="name"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-DataField" p:propertyName="idNumber"/>
+                <bean parent="Uif-DataField" p:propertyName="division"/>
+                <bean parent="Uif-DataField" p:propertyName="rank"/>
+                <bean parent="Uif-DataField" p:propertyName="center"/>
+                <bean parent="Uif-DataField" p:propertyName="program"/>
+                <bean parent="Uif-LinkField" p:Label="Email" p:href="mailto:@{#line.email}" p:linkText="@{#line.email}" />
+                <bean parent="Uif-DataField" p:propertyName="scopusIDString"/>
+                <bean parent="Uif-DataField" p:propertyName="scopusNumberPublications"/>
+                <bean parent="Uif-DataField" p:propertyName="scopusHIndex"/>
+            </list>
+        </property>
+        <!--<property name="page.instructionalText">
+          <value>
+                    Search KAUST faculty by entering a value into [b]Name[/b] and/or
+                    [b]ID Number[/b][br/]
+                    Other values provide drop-down list options.
+          </value>
+        </property>-->
+    </bean>
 </beans>

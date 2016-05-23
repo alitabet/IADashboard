@@ -20,49 +20,54 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans         http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
-    
+
     <bean id="PatentData" parent="DataObjectEntry"
-		p:dataObjectClass="org.kuali.kd2013.dataobject.PatentData" />
-		   
-	<bean id="OcrfAward" parent="DataObjectEntry"
-		p:dataObjectClass="org.kuali.kd2013.dataobject.OcrfAward" />
-		
-	<bean id="PrincipalInvestigator" parent="DataObjectEntry"
-		p:dataObjectClass="org.kuali.kd2013.dataobject.PrincipalInvestigator" />
-		
-	<bean id="PatentData-LookupView" parent="Uif-LookupView">
-    <property name="viewName" value="PatentData-LookupView"/>
-    <property name="viewHelperServiceClass" value="org.kuali.kd2013.dataobject.PatentDataLookupableImpl"/>
-    <property name="headerText" value="Patent Data Lookup View"/>
-    <property name="dataObjectClassName" value="org.kuali.kd2013.dataobject.PatentData"/>
-    <property name="criteriaFields">
-      <list>
-        <bean parent="Uif-LookupCriteriaInputField" p:propertyName="publicationNumber"/>
-        <bean parent="Uif-LookupCriteriaInputField" p:propertyName="source"/>
-        <bean parent="Uif-LookupCriteriaInputField" p:propertyName="awardNumber"/>
-      </list>
-    </property>
-    <property name="resultFields">
-      <list>
-		<bean parent="Uif-DataField" p:propertyName="publicationNumber" >
-		  <property name="inquiry">
-			<bean parent="Uif-Inquiry" p:dataObjectClassName="org.kuali.kd2013.dataobject.PatentData"
-			      p:viewName="PatentData-InquiryView" p:inquiryParameters="publicationNumber"/>
-		  </property>
-     	</bean>
-		<bean parent="Uif-DataField" p:propertyName="source" />
-		<bean parent="Uif-DataField" p:propertyName="title" />
-		<bean parent="Uif-DataField" p:propertyName="facultyNames" />
-		<bean parent="Uif-DataField" p:propertyName="filingNumber" />
-		<bean parent="Uif-DataField" p:propertyName="country" />
-		<bean parent="Uif-DataField" p:propertyName="pctNumber" />
-		<bean parent="Uif-DataField" p:propertyName="patentNumber" />
-		<bean parent="Uif-DataField" p:propertyName="type" />
-		<bean parent="Uif-DataField" p:propertyName="fieldDescription" />
-		<bean parent="Uif-DataField" p:propertyName="assignee" />
-		<bean parent="Uif-DataField" p:propertyName="status" />
-		<bean parent="Uif-DataField" p:propertyName="awardNumber" />
-      </list>
-    </property>
-  </bean>
+          p:dataObjectClass="org.kuali.kd2013.dataobject.PatentData"/>
+
+    <bean id="OcrfAward" parent="DataObjectEntry"
+          p:dataObjectClass="org.kuali.kd2013.dataobject.OcrfAward"/>
+
+    <bean id="PrincipalInvestigator" parent="DataObjectEntry"
+          p:dataObjectClass="org.kuali.kd2013.dataobject.PrincipalInvestigator"/>
+
+    <bean id="PatentData-LookupView" parent="Uif-LookupView">
+        <property name="viewName" value="PatentData-LookupView"/>
+        <property name="viewHelperServiceClass" value="org.kuali.kd2013.dataobject.GeneralLookupableImp"/>
+        <property name="headerText" value="Patent Data Lookup View"/>
+        <property name="dataObjectClassName" value="org.kuali.kd2013.dataobject.PatentData"/>
+        <property name="criteriaFields">
+            <list>
+                <bean parent="Uif-LookupCriteriaInputField" p:Label="Keyword" p:propertyName="keywordSearch"/>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="publicationNumber"/>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="source"/>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="title"/>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="assignee"/>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="status"/>
+                <bean parent="Uif-LookupCriteriaInputField" p:propertyName="awardNumber"/>
+            </list>
+        </property>
+        <property name="resultFields">
+            <list>
+                <bean parent="Uif-DataField" p:propertyName="publicationNumber">
+                    <property name="inquiry">
+                        <bean parent="Uif-Inquiry" p:dataObjectClassName="org.kuali.kd2013.dataobject.PatentData"
+                              p:viewName="PatentData-InquiryView" p:inquiryParameters="publicationNumber"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-DataField" p:propertyName="source"/>
+                <bean parent="Uif-DataField" p:propertyName="title"/>
+                <bean parent="Uif-DataField" p:propertyName="facultyNames"/>
+                <bean parent="Uif-DataField" p:propertyName="filingNumber"/>
+                <bean parent="Uif-DataField" p:propertyName="country"/>
+                <bean parent="Uif-DataField" p:propertyName="pctNumber"/>
+                <bean parent="Uif-DataField" p:propertyName="patentNumber"/>
+                <bean parent="Uif-DataField" p:propertyName="type"/>
+                <bean parent="Uif-DataField" p:propertyName="fieldDescription"/>
+                <bean parent="Uif-DataField" p:propertyName="assignee"/>
+                <bean parent="Uif-DataField" p:propertyName="status"/>
+                <bean parent="Uif-LinkField" p:Label="URL" p:href="@{#line.link}" p:linkText="Link" />
+                <bean parent="Uif-DataField" p:propertyName="awardNumber"/>
+            </list>
+        </property>
+    </bean>
 </beans>

@@ -1,16 +1,5 @@
 package org.kuali.kd2013.dataobject;
 
-import java.io.Serializable;
-import java.text.NumberFormat;
-import java.util.Locale;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 import org.kuali.rice.krad.data.provider.annotation.KeyValuesFinderClass;
 import org.kuali.rice.krad.data.provider.annotation.Label;
 import org.kuali.rice.krad.data.provider.annotation.NonPersistentProperty;
@@ -20,10 +9,21 @@ import org.kuali.rice.krad.data.provider.annotation.UifDisplayHint;
 import org.kuali.rice.krad.data.provider.annotation.UifDisplayHintType;
 import org.kuali.rice.krad.data.provider.annotation.UifDisplayHints;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.Locale;
+import java.util.Map;
+
 @Entity
 @Table(name="contracts")
 @UifAutoCreateViews({UifAutoCreateViewType.INQUIRY, UifAutoCreateViewType.LOOKUP})
-public class Contract implements Serializable {
+public class Contract implements Serializable, DataObject {
 
 	private static final long serialVersionUID = 4768156680246084251L;
 	
@@ -74,12 +74,11 @@ public class Contract implements Serializable {
 	
 	@Column(name = "collaborator",length=250)
 	@Label("External Collaborators")
-
     private String collaborator; // Name of external collaborator(s)
 	
 	
 	@Column(name = "spon_coll_type",length=250)
-	@Label("Sponsor/Collaboratro Type")
+	@Label("Sponsor/Collaborator Type")
 	@UifDisplayHints({
 		@UifDisplayHint(value=UifDisplayHintType.NO_LOOKUP_CRITERIA),
 		@UifDisplayHint(value=UifDisplayHintType.NO_LOOKUP_RESULT)
@@ -488,5 +487,17 @@ public class Contract implements Serializable {
 
 	public void setAward(OcrfAward award) {
 		this.award = award;
+	}
+
+	@Override
+	public void addToCollection(Object obj, Map<String, Object> results) {
+		Contract contract = (Contract) obj;
+		if (!results.containsKey(contract.getOrsNumber())) results.put(contract.getOrsNumber(), contract);
+	}
+
+	@Override
+	public String[] getValues() {
+		String[] values = {"name", "institution", "collaborator", "contractType"};
+		return values;
 	}
 }
